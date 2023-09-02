@@ -1,0 +1,68 @@
+h1 {
+    font-weight:normal;
+}
+#chat-container {
+    display:flex;
+    flex-direction:row;
+}
+#chat {
+    display:flex;
+    flex-direction:column;
+    width:calc(100% - 124px);
+    background-color:white;
+    opacity:1;
+}
+#chat-container {
+    background-color:white;
+    opacity:1;
+}    
+#chatContent {
+    padding:15px;
+    h1 {
+       text-align:left;     
+    }
+}
+.chat-line {    
+    .line {
+        display:flex;
+        flex-direction:row;
+    }
+    .part,.join, .mode, .nick, .kick, .ban {
+        font-style:italic;
+        margin-bottom:5px;
+    }
+
+    display:flex;
+    flex-direction:row;
+    .time {
+        width:60px!important;
+        padding:0px 5px;
+        margin-right:10px;
+    }
+    .username {
+        margin-right:10px;
+    }
+}
+
+.textChat {
+    display:flex;
+    flex-direction:column;
+    height:calc(100vh - 184px);    
+    background:url("/assets/images/coffe.png") 50% 50% no-repeat;
+    overflow:auto;
+    opacity:1;
+    background-color:white;
+}
+
+    
+@media (max-width: 720px) { 
+    .textchat { 
+        height:calc(100vh - 208px)!important;    
+    }
+}
+
+@media (max-width: 420px) { 
+    .textchat { 
+        height:calc(100vh - 208px)!important;    
+    }
+}

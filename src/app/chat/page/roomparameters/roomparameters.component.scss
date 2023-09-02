@@ -1,0 +1,23 @@
+.roomParameters {    
+    display:flex;
+    flex-direction:column;
+    padding:1rem;    
+    .top {
+        display:flex;
+        flex-direction:row;
+    }
+    .left, .right {
+        margin:1%;
+        width:46%;
+        display:flex;
+        flex-direction:column;    
+    }
+    .lists {
+        display:flex;
+        flex-direction:row;
+        .section {
+            width: 30%;
+            margin:1.5%;
+        }
+    }        
+}

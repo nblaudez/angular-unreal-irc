@@ -1,0 +1,40 @@
+<div id='chat-container'>
+    <div id='chat'>
+        <div class="textChat" id="chatContent">
+            <h1>{{interface.selectedItem}}</h1>
+            <div *ngFor="let line of interface.chatContent[interface.selectedItem]" class="{{line.type}} chat-line">
+                <div *ngIf="line.type == 'text'" class="line">
+                    <div class='time'>{{line.time |date:'hh:mm:ss'}}</div>
+                    <div class='username'>{{line.username}} : </div>
+                    <div class='text'> {{line.text}}</div>
+                </div>    
+                <div *ngIf="line.type == 'join'" class='info'>
+                    <div class='join' i18n>{{line.username}} à rejoint {{line.room}}</div>
+                </div>
+                <div *ngIf="line.type == 'part'" class='info'>
+                    <div class='part' i18n>{{line.username}} est parti de {{line.room}}</div>
+                </div>
+                <div *ngIf="line.type == 'mode'">
+                    <div class='mode'>{{line.text}}</div>
+                </div>
+                <div *ngIf="line.type == 'kick'">
+                    <div class='kick'>{{line.text}}</div>
+                </div>
+                <div *ngIf="line.type == 'nick'">
+                    <div class='nick' i18n>{{line.oldnick}} s'apelle maintenant {{line.newnick}}</div>
+                </div>
+                <div *ngIf="line.type == 'info'">
+                    <div class='info'>{{line.text}}</div>
+                </div>
+                <div *ngIf="line.type == 'ban'">
+                    <div class='ban'>{{line.nick}} à banné {{line.bannedNick}}</div>
+                </div>                
+                <div *ngIf="line.type == 'quit'">
+                    <div class='ban'>{{line.username}} s'est deconnecté</div>
+                </div>                
+            </div>   
+        </div>  
+        <chat-messagebox *ngIf="interface.selectedItem != 'info'"></chat-messagebox>
+    </div>
+    <chat-rightsidebar id="sidebarright"></chat-rightsidebar>  
+</div>

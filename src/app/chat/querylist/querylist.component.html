@@ -1,0 +1,11 @@
+<h3>Messages privés :</h3>
+<mat-checkbox (click)="setPm()" [(ngModel)]="pmPermitted" color="primary" checked>Accepter les messages privés</mat-checkbox>
+
+<div *ngFor="let query of interface.queries" class="queriesList">
+    <button mat-button color="primary" (click)="interface.changeSelectedItem(query.nickname)">{{query.nickname}}</button> <mat-icon [matMenuTriggerFor]="menuQuery" [matMenuTriggerData]="{query : query}" class="queryIcon">more_vert</mat-icon>
+</div>
+<mat-menu #menuQuery="matMenu">
+    <ng-template matMenuContent let-query="query">
+        <button mat-menu-item (click)="closeQuery(query.nickname)">Fermer le pv</button>
+    </ng-template>
+</mat-menu>

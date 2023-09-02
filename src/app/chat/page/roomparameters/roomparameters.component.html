@@ -1,0 +1,48 @@
+<div id="room-parameters">    
+    <h1 i18n>Paramètres du salon {{room.name}}</h1>  
+    <div class="roomParameters">
+        <div class="top">
+            <div class="left">
+                <mat-checkbox color="primary" (click)="setViewOnList()" [(ngModel)]="viewOnList" checked>Afficher le salon sur la liste des salons</mat-checkbox>
+                <mat-checkbox color="primary" (click)="setOnInvitOnly()" [(ngModel)]="onInviteOnly">Accepter seulement les personnes invitées</mat-checkbox>
+                <mat-checkbox color="primary" [(ngModel)]="needPassword">Mettre un mot de passe au salon</mat-checkbox>
+                <div *ngIf="needPassword">
+                    <br />
+                    <mat-form-field>
+                        <mat-label i18n>Mot de passe du salon</mat-label>
+                        <input matInput [(ngModel)]="chanPassword" />
+                    </mat-form-field>
+                </div>    
+            </div>
+            <div class="right">
+                <mat-form-field>
+                    <mat-label>Profil d'anti flood</mat-label>
+                    <mat-select>
+                        <mat-option value="off">Off</mat-option>
+                        <mat-option value="very-relaxed"><strong>Very relaxed</strong><br>messages: 30 en 15 secondes<br/>changement de nick: 5 en 15 secondes</mat-option>
+                        <mat-option value="relaxed"><strong>Relaxed</strong><br>messages: 30 en 15 secondes<br/>changement de nick: 5 en 15 secondes</mat-option>
+                        <mat-option value="normal"><strong>Normal</strong><br>messages: 30 en 15 secondes<br/>changement de nick: 5 en 15 secondes</mat-option>
+                        <mat-option value="strict"><strong>Strict</strong><br>messages: 30 en 15 secondes<br/>changement de nick: 5 en 15 secondes</mat-option>
+                        <mat-option value="very-strict"><strong>Very strict</strong><br>messages: 30 en 15 secondes<br/>changement de nick: 5 en 15 secondes</mat-option>                    </mat-select>
+                </mat-form-field>
+            </div>    
+        </div>    
+        <br /><br />
+        <label mat-label>Message d'entrée</label>    
+        <br />
+        <textarea [(ngModel)]="room.entryMsg" rows="7"></textarea>
+        <br />
+
+        <div class="lists">
+            <div class="section">
+                <h4 i18n>Kicks automatique</h4>
+            </div>    
+            <div class="section">
+                <h4 i18n>Bans automatique</h4>
+            </div>
+            <div class="section">
+                <h4 i18n>Personnes invitées</h4>
+            </div>
+        </div>
+    </div>
+</div>

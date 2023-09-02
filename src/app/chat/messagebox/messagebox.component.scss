@@ -1,0 +1,16 @@
+
+.textBox {
+    display:flex;
+    flex-direction:row;
+    margin-top:10px;
+    opacity:1;
+    background-color:white;
+    input {
+        width:calc(100% - 100px);
+        height:30px;
+    }
+    button {
+        width:100px;
+        height:30px;
+    }
+}

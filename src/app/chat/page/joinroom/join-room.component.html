@@ -1,0 +1,73 @@
+<div id="dialogJoinRoom">
+    <h1 i18n>Rejoindre un salon</h1>    
+    <p i18n>Quel salon voulez vous rejoindre ou créer ?</p>
+    <mat-form-field>
+        <mat-label i18n>Nom du salon</mat-label>
+        <input matInput [(ngModel)]="roomToJoin">    
+    </mat-form-field>
+
+
+    <mat-form-field *ngIf="roomPasswordDisplay == true">
+        <mat-label i18n>Mot de passe</mat-label>
+        <input matInput [(ngModel)]="roomPassword">    
+    </mat-form-field>
+    <br />
+    <mat-checkbox color="primary" [(ngModel)]="roomPasswordDisplay">Ce salon nécessite un mot de passe</mat-checkbox>
+
+
+    <button class="join" mat-button (click)="join(roomToJoin)" i18n>Rejoindre</button>
+
+    <p i18n>Liste des salons</p>
+
+    <mat-form-field>
+        <input matInput type="text" (keyup)="doFilter($event)" [(ngModel)]="filterString" placeholder="Filtre"  i18n-placeholder>
+    </mat-form-field>
+    <br />
+    <button (click)="refresh()" mat-button>Rafraichir la liste des salons</button>
+    <br />
+    <table mat-table matSort #avaiableRoomsTable [dataSource]="dataSource" class="mat-elevation-z8">
+
+        <!--- Note that these columns can be defined in any order.
+              The actual rendered columns are set as a property on the row definition" -->
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef  mat-sort-header i18n> Salon </th>
+            <td mat-cell *matCellDef="let room"> {{room.name}} </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="nbUsers">
+            <th mat-header-cell *matHeaderCellDef  mat-sort-header i18n> Utilisateurs </th>
+            <td mat-cell *matCellDef="let room"> {{room.nbUsers}} </td>
+        </ng-container>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="topic">
+            <th mat-header-cell *matHeaderCellDef  mat-sort-header i18n> Topic </th>
+            <td mat-cell *matCellDef="let room"> {{room.topic}} </td>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef i18n> Action </th>
+            <td mat-cell *matCellDef="let room">
+                <div *ngIf="room.isProtected">
+                    <mat-label i18n>Mot de passe du salon</mat-label>
+                    <input matInput [(ngModel)]="roomPasswords[room.name]">    
+                    <button (click)="join(room.name, roomPasswords[room.name])" mat-button>Rejoindre</button>
+                </div>
+                <button *ngIf="room.isProtected==false" (click)="join(room.name)" mat-button>Rejoindre</button>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator i18n-aria-label #paginator
+                   showFirstLastButtons
+                   [length]="avaiableRooms.length"
+                   [pageSize]="10"
+                   aria-label="Choissisez une page">
+    </mat-paginator>
+</div>    

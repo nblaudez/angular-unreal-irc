@@ -1,0 +1,11 @@
+<h1 mat-dialog-title>Entrez le message de kick</h1>
+<div mat-dialog-content>  
+  <mat-form-field>
+      <mat-label i18n>Raison du kick</mat-label>
+      <input type="text" matInput [(ngModel)]="reason">    
+  </mat-form-field>
+  <button mat-button color="primary" [mat-dialog-close]="reason">Kick {{data.nickname}}</button>
+</div>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Fermer</button>  
+</mat-dialog-actions>

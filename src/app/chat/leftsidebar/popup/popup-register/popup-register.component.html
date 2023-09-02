@@ -1,0 +1,20 @@
+<h1 mat-dialog-title>Identifiez vous</h1>
+<div mat-dialog-content>
+  Pour enregistrer le pseudp <strong>{{interface.connectedUser?.name}}</strong> veuillez entrer un mot de passe:<br />
+  <br />
+  <mat-form-field>
+      <mat-label i18n>Mot de passe :</mat-label>
+      <input type="password" matInput [(ngModel)]="password">    
+  </mat-form-field>
+  <br />
+  <mat-form-field>
+      <mat-label i18n>Confirmation  :</mat-label>
+      <input type="password" matInput [(ngModel)]="passwordConfirmation">    
+  </mat-form-field>
+  <br />
+  <p class="error" *ngIf="passwordMissMatch">Les deux mots de passe doivent etre identique et le mot de passe ne peut pas etre vide</p>    
+  <button mat-button color="primary" mat-dialog-close [mat-dialog-close]="password">Enregistrer</button>
+</div>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Fermer</button>  
+</mat-dialog-actions>

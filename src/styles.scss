@@ -1,0 +1,48 @@
+@import "node_modules/angular-notifier/styles";
+
+/* You can add global styles to this file, and also import other style files */
+
+html, body {
+    height: 100%;
+}
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-size:14px;
+    
+    /* The image used */
+    background-image: url("/assets/images/coffe.png");
+
+    
+
+    /* Center and scale the image nicely */
+    /*background-attachment: fixed;*/
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+h1 {
+    color:#474747;
+}
+
+h3,h4 {
+    padding:5px;
+    font-weight: 500!important;
+    font-family:Roboto!important;
+    letter-spacing: 1.25px;
+    font-size:15px;
+}
+
+input {
+    background: transparent!important;
+}
+
+.clear {
+  clear:both;
+  height:1px;
+} 
+
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

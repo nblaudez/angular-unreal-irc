@@ -1,0 +1,18 @@
+<mat-toolbar>
+  <button [matMenuTriggerFor]="menu" mat-icon-button class="example-icon" aria-label="Menu">
+    <mat-icon>menu</mat-icon>
+    <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="router.navigate(['/']);" i18n>Dialogue en direct</button>
+        <button mat-menu-item i18n (click)="interface.section='aide'" routerLink='/aide'>Aide</button>        
+        <button mat-menu-item i18n (click)="interface.section='pages'" routerLink='/philosophie'>Notre philosophie</button>
+        <button mat-menu-item i18n (click)="interface.section='pages'" routerLink='/reglement'>Réglement</button>
+        <button mat-menu-item i18n (click)="interface.section='pages'" routerLink='/partenaires'>Partenaires</button>
+        <button mat-menu-item *ngIf="irc.isConnected"(click)="irc.disconnect()" i18n>Se déconnecter</button>
+    </mat-menu>
+
+  </button>
+
+  <span>TCHAT.CAFE</span>
+  <span class="tchat-spacer"></span>
+  <div id="ezoic-pub-ad-placeholder-103"> </div>
+</mat-toolbar>

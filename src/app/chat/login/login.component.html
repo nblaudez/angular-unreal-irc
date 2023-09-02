@@ -1,0 +1,33 @@
+<div class="container">    
+    <div class="left">
+        <h1>Gratuit et sans inscription</h1>
+        <p>Venez dialoguer en direct sur tchat.cafe. 
+            Il suffit d'entrer un pseudo et de choisir un mot de passe afin d'accéder à nos salons.
+            Le chat est gratuit et ne nécessite aucune information supplémentaire</p>
+        <br />
+        <h1>Accés simple à vos salons</h1>
+        <p>
+            Enregistrer votre pseudo et votre salon et 
+            accédé à votre salon via une adresse simple du type https://nomdusalon.tchat.cafe/</p>
+            
+    </div>    
+    <div class='login'>
+        <p>Si vous n'avez pas de mot de passe vous pouvez laisser le champ mot de passe vide.</p>
+        <p>Si vous n'avez pas de mot de passe et que vous en indiquez un, si le pseudo n'est pas enregistré alors il sera enregistré avec ce mot de passe.</p>
+        <mat-form-field>
+            <mat-label i18n>Nom d'utilisateur</mat-label>
+            <input matInput [(ngModel)]="username" />
+        </mat-form-field>       
+        <mat-form-field>
+            <mat-label i18n>Mot de passe</mat-label>
+            <input matInput [(ngModel)]="password" type='password' />
+        </mat-form-field>
+        <button mat-raised-button  class='login' (click)="connect()" i18n>Se connecter</button>
+    </div>
+    <div class="right">
+        <h1>Gérez vos salons</h1>
+        <p>Une fois choisi un mot de passe pour votre pseudo vous pourrez enregister vos salons.
+        Il vous sera possible de donner des droits à d'autres utilisateurs afin de faire la modération.
+        Vous pouvez également mettre les salons sur invitation ou indiquer un mot de passe pour pouvoir y acceder.</p>
+    </div>    
+</div>

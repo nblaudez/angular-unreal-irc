@@ -1,0 +1,15 @@
+
+<button mat-button color="primary" routerLink="/chat/pages/room/join">Rejoindre ou créer un salon</button>
+<h3 i18n>Salons :</h3>
+<div *ngFor="let room of interface.rooms" class="roomList">
+    <button mat-button color="primary" (click)="selectRoom(room)">{{room.name}}</button> <mat-icon [matMenuTriggerFor]="menuRoom" [matMenuTriggerData]="{room: room}" class="roomIcon" *ngIf="room.name != '#cafe'">more_vert</mat-icon>
+</div>
+
+<mat-menu #menuRoom="matMenu">
+    <ng-template matMenuContent let-room="room">
+        <button mat-menu-item (click)="goTo('roomParameters',{room:room})">Paramètres</button>
+        <button *ngIf="room.haveMode('r') == false" mat-menu-item (click)="registerRoom(room)">Enregistrer le salon</button>
+        <button *ngIf="room.haveMode('r') == true && room.owner == interface.connectedUser?.name" mat-menu-item (click)="unregisterRoom(room)">Abandonner le salon</button>
+        <button mat-menu-item (click)="leaveRoom(room)">Quitter le salon</button>
+    </ng-template>
+</mat-menu>

@@ -1,0 +1,17 @@
+<div class='clear'>
+
+<section class="sidenav-container" *ngIf='irc.isConnected != true'>
+  <chat-login></chat-login>  
+</section>
+
+<section class="sidenav-container chatContainer" *ngIf='irc.isConnected == true'>
+    <div class="icons">
+        <mat-icon (click)="display('userlist')">group</mat-icon>
+        <mat-icon (click)="display('sidebar')">free_breakfast</mat-icon>
+    </div>   
+    <chat-leftsidebar *ngIf="section=='sidebar' || section=='all'" class="sidebar"></chat-leftsidebar>
+
+    <section class="chat">                
+        <router-outlet name="chat"></router-outlet>
+    </section>
+</section>

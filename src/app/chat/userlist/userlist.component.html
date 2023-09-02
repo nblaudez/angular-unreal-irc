@@ -1,0 +1,38 @@
+ <div class="userList" *ngIf="interface.users[interface.selectedItem]">
+  <button [matMenuTriggerFor]="menuUser" [matMenuTriggerData]="{user: user}" *ngFor="let user of interface.users[interface.selectedItem].users">
+      <span *ngIf="user.isVoice" >+</span>
+      <span *ngIf="user.isAdmin" >&</span>
+      <span *ngIf="user.isOwner" >~</span>
+      <span *ngIf="user.isOp" >@</span>
+      <span *ngIf="user.isHop" >%</span>
+      {{user.nickname}}
+  </button>    
+</div>
+<div id="ezoic-pub-ad-placeholder-104"> </div>
+
+<mat-menu #menuUser="matMenu">              
+    <ng-template matMenuContent let-user="user">        
+      <button mat-menu-item i18n>Profil</button>
+      <button *ngIf="user.nickname != interface.connectedUser?.name" mat-menu-item i18n (click)="openQuery(user.nickname)">Message privé</button>
+      <button *ngIf="user.nickname != interface.connectedUser?.name && !interface.ignoreList.includes(user.nickname)" mat-menu-item i18n (click)="ignore(user.nickname)">Ignorer</button>      
+      <button *ngIf="user.nickname != interface.connectedUser?.name && interface.ignoreList.includes(user.nickname)" mat-menu-item i18n (click)="designore(user.nickname)">Désignorer</button>      
+      <button [matMenuTriggerData]="{user: user}" [matMenuTriggerFor]="op" *ngIf="user.nickname != interface.connectedUser?.name" mat-menu-item i18n>Operateur</button>      
+    </ng-template>
+</mat-menu>
+
+<mat-menu #op="matMenu">              
+    <ng-template matMenuContent let-user="user"> 
+      <button mat-menu-item i18n (click)="kick(user.nickname)">Kicker</button>
+      <button mat-menu-item i18n  (click)="ban(user.nickname)">Bannir</button>
+      ______________________
+      <button mat-menu-item i18n (click)="setMode('+v',user)" *ngIf='user.isVoice==false'>Donner le voice</button>
+      <button mat-menu-item i18n (click)="setMode('-v',user)" *ngIf='user.isVoice'>Prendre le voice</button>
+      <button mat-menu-item i18n (click)="setMode('+h',user)" *ngIf='user.isHalfop==false'>Donner le half-op</button>
+      <button mat-menu-item i18n (click)="setMode('+-h',user)" *ngIf='user.isHalfop'>Prendre le half-op</button>
+      <button mat-menu-item i18n (click)="setMode('+o',user)" *ngIf='user.isOp==false'>Donner le op</button>
+      <button mat-menu-item i18n (click)="setMode('-o',user)" *ngIf='user.isOp'>Prendre le op</button>
+      <button mat-menu-item i18n (click)="setMode('+a',user)" *ngIf='user.isAdmin == false'>Donner l'admin</button>
+      <button mat-menu-item i18n (click)="setMode('-a',user)" *ngIf='user.isAdmin'>Prendre l'admin</button>      
+    </ng-template>
+</mat-menu>
+

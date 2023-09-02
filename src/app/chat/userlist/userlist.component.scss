@@ -1,0 +1,49 @@
+
+.userList {   
+    height:calc(100vh - 164px - 250px)!important;
+    overflow-y:auto;
+    overflow-x:hidden;
+
+    button {
+        border:none!important;
+        background-color:white!important;
+        width:250px;
+        padding:5px;
+        text-align:left;
+    }
+    .icon {
+        position:relative;
+        top:7px;
+    }
+}    
+
+.mat-mdc-form-field-infix {
+    width:500px!important;
+}
+
+.icons {
+    display:none;
+    font-size:1.5rem;
+}    
+
+@media (max-width: 720px) { 
+    .userList {   
+        height:calc(100vh - 164px)!important;
+        overflow-y:auto;
+        overflow-x:hidden;
+    }
+    .icons {
+        display:block;
+    }    
+}
+
+@media (max-width: 420px) { 
+    .icons {
+        display:block;
+    }
+    .userList {   
+        height:calc(100vh - 164px)!important;
+        overflow-y:auto;
+        overflow-x:hidden;
+    }    
+}  

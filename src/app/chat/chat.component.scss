@@ -1,0 +1,48 @@
+h1, h2, h3, h4 ,h5 {
+  font-weight:normal;
+  margin:10px;
+}
+
+
+.chatContainer {
+  display:flex;
+  flex-direction:row;
+  opacity:1;
+  background-color:white;
+  .sidebar {
+      width:270px;
+  }    
+  .chat {
+      width:calc(100% - 270px);
+  }
+}
+
+@media (max-width: 720px) { 
+    .chatContainer {
+      .sidebar {
+          display:none!important;
+      }    
+      .chat {
+        width:100%!important;
+      }
+    }
+    .icons {
+        display:flex;
+        flex-direction:row;        
+    }
+}
+
+@media (max-width: 420px) { 
+    .chatContainer {
+        .sidebar {
+            display:none!important;
+        }
+        .chat {
+           width:100%!important;
+        }
+    }
+    .icons {
+        display:flex;
+        flex-direction:row;        
+    }
+}    

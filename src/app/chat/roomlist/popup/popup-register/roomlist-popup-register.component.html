@@ -1,0 +1,15 @@
+<h1 mat-dialog-title>Enregistrement du salon</h1>
+<div mat-dialog-content>
+  Entrer la description du salon :
+  <br />
+  <mat-form-field>
+      <mat-label i18n>Description:</mat-label>
+      <textarea  matInput [(ngModel)]="description"></textarea>    
+  </mat-form-field>
+  <br />
+  <br />  
+  <button mat-button color="primary" [mat-dialog-close]="description">Enregistrer</button>
+</div>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Fermer</button>  
+</mat-dialog-actions>

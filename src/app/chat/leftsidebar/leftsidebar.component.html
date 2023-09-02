@@ -1,0 +1,16 @@
+<section class="sidebarLeft">
+    <h1>
+        <span *ngIf="updateNickname == false">
+            <mat-icon class="icon" fontIcon="person"></mat-icon>{{interface.connectedUser?.name}} <button mat-button color="primary" (click)="updateNickname = true">(changer)</button>
+        </span>
+        <span *ngIf="updateNickname == true">            
+            <input matInput [(ngModel)]="newNickname" class='newNickname'>                
+            <button mat-button color="primary" (click)="changeNickname()">Changer</button>
+        </span>    
+    </h1>
+    <button (click)="register()" mat-button color="primary" *ngIf="interface.canRegisterNickname" class="primary">Enregistrer le pseudonyme</button>    
+    <button (click)="auth()" mat-button color="primary" *ngIf="interface.canAuthNickname" class="primary">S'identifier</button>
+   
+    <chat-roomlist></chat-roomlist>
+    <chat-querylist></chat-querylist>                 
+</section> 
