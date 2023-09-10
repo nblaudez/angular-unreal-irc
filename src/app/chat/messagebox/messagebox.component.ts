@@ -13,7 +13,7 @@ export class MessageboxComponent extends AbstractComponent {
   public textToSend: string="";  
   public viewJoinPart = true;
 
-  public enableJoinPart(value: boolean) {
+  public enableJoinPart(value: boolean) {    
     if(value) {
         $('.part').show();
         $('.join').show();

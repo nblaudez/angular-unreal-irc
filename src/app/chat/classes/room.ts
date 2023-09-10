@@ -3,7 +3,7 @@ import { User } from './user';
 
 export class Room extends Abstract{
     
-    public name: string | null = null;
+    public name: string | null= null;
     public cleanedName: string | null = null;   
     public mode: string = "tn";
     public topic: string | null = null;

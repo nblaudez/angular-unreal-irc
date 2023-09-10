@@ -24,9 +24,12 @@ export class RoomlistComponent extends AbstractComponent {
         this.selectRoom({name:'#cafe'});
     }
     
-    selectRoom(room: any) {
-        this.router.navigate(['/chat/room/'+room.name]);
+    selectRoom(room: any) {        
         this.interface.changeSelectedItem(room.name);        
+        let objDiv = document.getElementById("chatContent");
+        if(objDiv) {                
+            objDiv.scrollTop = objDiv.scrollHeight+20;                
+        }
     }
     
     goTo(room: string, data: any = null) {

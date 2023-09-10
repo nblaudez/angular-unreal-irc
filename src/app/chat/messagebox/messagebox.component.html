@@ -1,4 +1,4 @@
-<mat-checkbox (click)="enableJoinPart(viewJoinPart)" [(ngModel)]="viewJoinPart" color="primary" checked>Afficher les messages d'entrée, de sortie, de kick, de ban et de changement de mode du salon</mat-checkbox>
+<mat-checkbox (change)="enableJoinPart(viewJoinPart)" [(ngModel)]="viewJoinPart" color="primary" checked>Afficher les messages d'entrée, de sortie, de kick, de ban et de changement de mode du salon</mat-checkbox>
 <div class="textBox">        
     <input matInput [(ngModel)]="textToSend" (keyup.enter)="sendText()"/>
     <button mat-button color="primary" (click)="sendText()" i18n>Envoyer</button>

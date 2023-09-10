@@ -8,7 +8,7 @@ export class Interface {
     public dialogs: any = {};
     public rooms: any[] = [];
     public queries: any[] = [];
-    public selectedItem: string  = "info";    
+    public selectedItem: string = "info";    
     public users: any = {};
     public avaiableRooms: any[] = [];
     public avaiableRoomsTable: any;

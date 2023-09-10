@@ -30,6 +30,7 @@
     "domino": "^2.1.6",
     "express": "^4.15.2",
     "fs": "^0.0.1-security",
+    "jquery": "^3.7.1",
     "mock-browser": "^0.92.14",
     "rxjs": "~7.8.0",
     "zone.js": "~0.13.0"

@@ -383,16 +383,18 @@ export class Irc {
         this.sendToIrc("mode " + roomJoined);
         let nick = params[1].split("!")[0].replace("!", "");
         if (nick == this.connectedUser?.name) {
-            let room = new Room(roomJoined), modes;
-            room.cleanedName = roomJoined.replace("#","");
+            let room = new Room(roomJoined);
+            room.cleanedName = roomJoined.replace("#","")+"";
             this.sendToIrc("cs info "+roomJoined);          
+            Irc.interface.selectedItem = roomJoined;
+            Irc.interface.selectedRoom = room;
             Irc.interface.rooms.push(room);
             Irc.interface.rooms.sort();
-            Irc.interface.router.navigate(["chat/room/"+roomJoined.replace("#","")]);
+            Irc.interface.router.navigate(["chat/room/"+room.cleanedName]);
         }
         if (!Irc.interface.chatContent[roomJoined]) {
             Irc.interface.chatContent[roomJoined] = [];
-        }        
+        }                
         Irc.interface.chatContent[roomJoined].push({ "type": "join", "time": new Date(), "username": nick, "room": roomJoined });
         this.sendToIrc("names "+ roomJoined);
     }
@@ -513,9 +515,7 @@ export class Irc {
 
     }
 
-    onMode(data: any) {
-        console.log("--- OnMode:", data);
-        
+    onMode(data: any) {                
         if(data.params[2] == undefined) {
             switch(data.params[1]) {
                 case "-s":
@@ -606,8 +606,7 @@ export class Irc {
                     Irc.interface.chatContent[dest].push({ "type": "mode", "text": user +" n'a plus de status proprietaire sur "+dest });                    
                     this.sendToIrc("names "+dest);
                     break;                 
-                case "+b":
-                    console.log("--- BAN DATA:",data);
+                case "+b":                    
                     dest = data.raw.split(":")[1].split(" ")[4];
                     Irc.interface.chatContent[Irc.interface.selectedItem].push({ "type": "ban", "time": new Date(), "nick":this.connectedUser?.name,"bannedNick": dest });    
                     break;
