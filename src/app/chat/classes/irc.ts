@@ -27,7 +27,7 @@ export class Irc {
             hidden: false
         },
         nick: 'tchatuser',
-        password: 'tch4tus3r852',
+        password: '',
         host: 'localhost',
         user: 'tchat-user',
         info: 'tchat-user',
@@ -148,9 +148,10 @@ export class Irc {
                         let oldnick = payload.raw.split("NICK")[0].split(':')[1].split("!")[0].trim();
                         let newnick = payload.raw.split("NICK")[1].split(':')[1].trim();                        
                                                 
-                        Irc.interface.updateUserNick(oldnick, newnick);
+                        obj.updateUserNick(oldnick, newnick);
                         if(oldnick == obj.connectedUser?.name) {
-                            obj.updateUser(newnick);
+                            obj.updateUser(newnick);                            
+                            Irc.interface.updateUser(newnick);
                         }
                                                 
                         break;                    
@@ -243,7 +244,7 @@ export class Irc {
             }
             let objDiv = document.getElementById("chatContent");
             if(objDiv) {                
-                objDiv.scrollTop = objDiv.scrollHeight+20;                
+                objDiv.scrollTop = objDiv.scrollHeight+30;                
             }
         }
     }
@@ -405,8 +406,20 @@ export class Irc {
         let nickParted = params[1].split("!")[0].replace("!", "").replace(/\~\@\+/g, '');
         
         this.sendToIrc("names",roomParted);
-        
-        Irc.interface.partRoom(roomParted, nickParted);
+                
+        if(nickParted == this.connectedUser?.name) {
+            let rooms = [];
+            let actualRooms = Irc.interface.rooms;
+            for (let actualRoom of Irc.interface.rooms) {                
+                if (actualRoom.name != roomParted) {
+                    rooms.push(actualRoom);
+                }
+            }
+            Irc.interface.rooms = rooms;
+            delete Irc.interface.chatContent[roomParted];
+        } else {
+            Irc.interface.chatContent[roomParted].push({ "type": "part", "time": new Date(), "username": nickParted, "room": roomParted });                
+        }
     }
 
     onWhois(data: any) {
@@ -421,8 +434,7 @@ export class Irc {
         let user = data.raw.split(":")[1].split("!")[0];
         let userKicked = data.raw.split(":")[1].split(" ")[3];
         let room = data.raw.split(":")[1].split(" ")[2];
-        let reason = data.raw.split(":")[2];
-        console.log("-- USER:",user,"-- userkicked:",userKicked,"-- room:",room,"-- reason:",reason);
+        let reason = data.raw.split(":")[2];        
         Irc.interface.chatContent[room].push({ "type": "kick", "time": new Date(), "text": user + " a kicker "+userKicked +" de "+room+" : "+reason  });
         this.sendToIrc("names "+room);
     }
@@ -470,10 +482,11 @@ export class Irc {
         Irc.interface.users[room] = roomUserList;        
     }
 
-    onPrivmsg(data: any) {
-        let params = data['raw'].split(":");
-        let user = params[1].split("!")[0];
-        let dest = params[1].split(" ")[2];
+    onPrivmsg(data: any) {        
+        let params = data['raw'].split(/PRIVMSG ([#a-zA-Z0-9]+) :/);
+        console.log(params);        
+        let user = params[0].split("!")[0];
+        let dest = params[1];
         
         if(dest.indexOf('#') != -1) {
             if (!Irc.interface.chatContent[dest]) {
@@ -643,8 +656,7 @@ export class Irc {
         let quitUser = data.raw.split(":")[1].split("!")[0];        
         for(let room in Irc.interface.users) {            
             let usersRoom : string[] = [];
-            for(let user of Irc.interface.users[room].users) {                
-                console.log("USER:", user);
+            for(let user of Irc.interface.users[room].users) {                                
                 if(user.nickname != quitUser) {
                     usersRoom.push(user)
                 } else {                    
@@ -695,6 +707,9 @@ export class Irc {
                 if(message.indexOf("registered and protected") != -1) {                    
                     Irc.interface.canRegisterNickname = false;
                     Irc.interface.canAuthNickname = true;
+                    if(this.config.password == "") {
+                        Irc.interface.components["chat"].openNickAuthPopup();
+                    }
                 }
                 if(message.indexOf("Password accepted - you are now recognized") != -1) {                    
                     Irc.interface.canRegisterNickname = false;
@@ -720,9 +735,23 @@ export class Irc {
     }
   
     updateUser(newnick: string) {        
-        this.connectedUser = new User(newnick);        
+        this.connectedUser = new User(newnick);                
     }
 
+    updateUserNick(oldnick:string, newnick:string) {
+        if(oldnick == this.connectedUser?.name) {
+            Irc.interface.updateUser(newnick);
+            if(newnick.indexOf("Guest") != -1) {
+            Irc.interface.notifier.notify("info", "Votre pseudo à été changé en "+newnick+" car "+oldnick+" appartient déjà a quelqu'un");
+            }                    
+        }
+        
+        for(let room of Irc.interface.rooms) {            
+            this.sendToIrc("names", room.name);
+            Irc.interface.chatContent[room.name].push({"type":"nick","oldnick":oldnick,"newnick":newnick});
+        }
+    }
+    
     disconnect() {
         this.ws.close();
         this.isConnected = false;

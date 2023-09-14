@@ -29,7 +29,7 @@ export class AppComponent extends AbstractComponent {
     const topAppBarElement: HTMLElement | null = document.querySelector('.mdc-top-app-bar');
     if(topAppBarElement) {
         const topAppBar = new MDCTopAppBar(topAppBarElement);
-    }   
+    }
   }
       
 }

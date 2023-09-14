@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AbstractComponent } from './classes/abstract.component';
-
+import { PopupAuthComponent } from "./leftsidebar/popup/popup-auth/popup-auth.component";
+import {MatDialog, MAT_DIALOG_DATA, MatDialogRef, MatDialogModule} from '@angular/material/dialog';
 
 type message = {
     raw: any;
@@ -29,11 +30,23 @@ export class ChatComponent extends AbstractComponent {
   sidebarContent = true;
   section = 'all';
     
-  constructor() {
-      super();       
+  constructor(public dialog: MatDialog) {
+    super();
+    
+    this.interface.components["chat"] = this
   }
-  
+
   display(section: string) {
     this.section = section
+  }
+  
+  public openNickAuthPopup() {  
+            
+        const dialogRef = this.dialog.open(PopupAuthComponent, {});
+
+        dialogRef.afterClosed().subscribe((result: string) => {
+          this.irc.sendToIrc("ns identify "+result);
+        });
+          
   }
 }

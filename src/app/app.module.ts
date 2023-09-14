@@ -12,10 +12,9 @@ import { NotifierModule } from 'angular-notifier';
 import { ChatModule } from './chat/chat.module';
 import { AideModule } from './aide/aide.module';
 
-
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent   
   ],
   imports: [
     BrowserModule,

@@ -6,7 +6,8 @@ import { AbstractComponent } from "../../../classes/abstract.component";
   templateUrl: './popup-auth.component.html',
   styleUrls: ['./popup-auth.component.scss']
 })
-export class  PopupAuthComponent extends AbstractComponent{
+export class PopupAuthComponent extends AbstractComponent {
 
     public password:string | null = null;
+    
 }

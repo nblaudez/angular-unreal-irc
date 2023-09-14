@@ -1,4 +1,3 @@
-import {ChatComponent} from "../chat.component"
 import { Irc } from "./irc";
 import { Interface } from "./interface";
 
