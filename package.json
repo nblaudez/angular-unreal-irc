@@ -32,7 +32,9 @@
     "fs": "^0.0.1-security",
     "jquery": "^3.7.1",
     "mock-browser": "^0.92.14",
+    "mocks": "^0.0.15",
     "rxjs": "~7.8.0",
+    "xhr2": "^0.2.1",
     "zone.js": "~0.13.0"
   },
   "devDependencies": {
@@ -51,6 +53,8 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.0.0",
     "tslib": "^2.6.2",
-    "typescript": "~5.0.2"
+    "typescript": "~5.0.2",
+    "ws": "^8.14.2",
+    "xmlhttprequest": "^1.8.0"
   }
 }

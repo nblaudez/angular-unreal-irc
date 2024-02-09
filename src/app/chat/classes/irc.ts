@@ -7,6 +7,7 @@ import { Room } from "./room";
 import { RoomUser } from "./roomuser";
 import { RoomUserList } from "./roomuserlist";
 
+
 declare var $: any;
 
 export class Irc {
@@ -21,7 +22,7 @@ export class Irc {
         server: {
             id: 'tchat-1',
             name: 'Tchat server',
-            webSocketUrl: 'wss://irc.tchat.cafe:7002',
+            webSocketUrl: 'ws://127.0.0.1:7002',
             channels: ["#cafe"],
             timestamp: 0,
             hidden: false
@@ -49,7 +50,7 @@ export class Irc {
         
         return Irc.instance;
     }
-
+    
     public connect() {        
         this.ws = new WebSocket(this.config.server.webSocketUrl);
         let obj = this;        
@@ -242,7 +243,7 @@ export class Irc {
                     
                 }
             }
-            let objDiv = document.getElementById("chatContent");
+            let objDiv = this.document.getElementById("chatContent");
             if(objDiv) {                
                 objDiv.scrollTop = objDiv.scrollHeight+30;                
             }
